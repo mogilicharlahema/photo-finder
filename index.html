@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            color: cadetblue;
+            text-align: center;
+            margin-top: 80px;
+            font-size: 50px;
+        }
+
+        .bar {
+            padding: 15px; 
+            margin-left: 650px;
+            background-color:whitesmoke;
+            color: black;
+             border-radius: 5px;
+
+        }
+
+        button {
+            padding: 15px;
+            border-radius: 5px;
+             margin-left: 10px; 
+        }
+
+        ::placeholder {
+            color: crimson
+        }
+
+        #searchresult {
+            width: 80%;
+            margin: 100px auto 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr ;
+            gap: 50px;
+
+        }
+
+        #searchresult img {
+            width: 100%;
+            height: 260px;
+            /* object-fit: cover; */
+            border-radius: 15px;
+        }
+
+        #showmorebtn {
+            color: red;
+            background-color: cornflowerblue;
+            border: 0;
+            outline: 0;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin: 10px auto 100px;
+            cursor: pointer;
+            display: none;
+        }
+
+        body {
+            background-attachment: fixed;
+            background-color: darkmagenta;
+        }
+        /* .main{
+            border: 1px solid black;
+            height: 80px;
+            width: 600px;
+            margin: auto;
+            display: flex;
+        } */
+/* 
+        @media screen and (min-width: 768px) {
+        .bar {
+            margin-left: 50px; /* Adjusted for tablet screens */
+         /* }
+    } */ 
+
+    /* Laptop and larger screens */
+     /* @media screen and (min-width: 1024px) {
+        .bar {
+            margin-left: 150px; /* Adjusted for larger screens */
+         /* }
+    }  */ 
+
+    </style>
+</head>
+
+<body>
+    <h1>Image Search App</h1>
+    <!-- <div class="main"> -->
+    <form id="searchform">
+        <!-- <div class="main"> -->
+        <input class="bar" type="text" id="searchbox" placeholder="search anything here....">
+        <button>Search</button>
+    <!-- </div> -->
+    <!--  -->
+        <div id="searchresult"></div>
+
+
+        <button id="showmorebtn">showmore</button>
+    </form>
+    <script>
+        const accesskey = "krT57pdCdUVsHG33AHYxMGIl_k2F5N21Ww24QHcXA38";
+        const searchform = document.getElementById("searchform");
+        const searchbox = document.getElementById("searchbox");
+        const searchresult = document.getElementById("searchresult");
+        const showmorebtn = document.getElementById("showmorebtn");
+
+        let page = 1;
+        let keyword = ""
+        async function searchimages() {
+            const keyword = searchbox.value;
+            const url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accesskey}&per_page=09`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (page === 1) {
+                searchresult.innerHTML = ""
+            }
+
+            const results = data.results;
+            results.map((result) => {
+                const image = document.createElement("img");
+                image.src = result.urls.small;
+                const imagelink = document.createElement("a");
+                imagelink.href=result.links.html
+                imagelink.target = "_blank";
+                imagelink.appendChild(image);
+                searchresult.appendChild(imagelink);
+            });
+
+            showmorebtn.style.display = "block"
+        }
+
+        searchform.addEventListener("submit", (e) => {
+            e.preventDefault();
+            page = 1;
+            searchimages();
+        });
+
+        showmorebtn.addEventListener("click", () => {
+            page++
+
+            searchimages()
+        })
+
+    </script>
+</body>
+
+</html>
