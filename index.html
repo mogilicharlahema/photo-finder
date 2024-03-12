@@ -7,7 +7,7 @@
     <title>Document</title>
     <style>
         h1 {
-            color: cadetblue;
+            color:darkslateblue;
             text-align: center;
             margin-top: 80px;
             font-size: 50px;
@@ -15,17 +15,22 @@
 
         .bar {
             padding: 15px; 
-            margin-left: 650px;
+            /* margin-left: 600px; */
             background-color:whitesmoke;
             color: black;
-             border-radius: 5px;
+             border-radius: 15px;
+             font-size: 20px;
+              /* padding-left: 20px; */
+             padding-right: 50px;
 
         }
 
         button {
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 15px;
              margin-left: 10px; 
+             font-size: 20px;
+             color:crimson ;
         }
 
         ::placeholder {
@@ -41,15 +46,30 @@
 
         }
 
-        #searchresult img {
+        
+
+
+        .images{
             width: 100%;
-            height: 260px;
+            height: 260px; 
             /* object-fit: cover; */
-            border-radius: 15px;
+              border-radius: 25px;  
+
         }
+        .images:hover{
+            transform: translateY(-10px);
+        box-shadow: 1px 1px 20px darkred;
+        border-radius:50%;
+        transform: skew(10deg,10deg)
+
+        
+        } 
+
+      
+
 
         #showmorebtn {
-            color: red;
+            color:blue;
             background-color: cornflowerblue;
             border: 0;
             outline: 0;
@@ -62,41 +82,42 @@
 
         body {
             background-attachment: fixed;
-            background-color: darkmagenta;
+            background-color:aquamarine
         }
-        /* .main{
-            border: 1px solid black;
-            height: 80px;
-            width: 600px;
-            margin: auto;
-            display: flex;
-        } */
-/* 
-        @media screen and (min-width: 768px) {
+/* meadia queries */
         .bar {
-            margin-left: 50px; /* Adjusted for tablet screens */
-         /* }
-    } */ 
+            width: 200px;
+        }
 
-    /* Laptop and larger screens */
-     /* @media screen and (min-width: 1024px) {
-        .bar {
-            margin-left: 150px; /* Adjusted for larger screens */
-         /* }
-    }  */ 
+        .images {
+            width: 350px;
+            height: 350px;
+        }
+        #searchresult {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        }
+
+        #searchform{
+            text-align: center;
+        }
+
+         
+    
+        
 
     </style>
 </head>
 
 <body>
     <h1>Image Search App</h1>
-    <!-- <div class="main"> -->
+    
     <form id="searchform">
-        <!-- <div class="main"> -->
+       
         <input class="bar" type="text" id="searchbox" placeholder="search anything here....">
         <button>Search</button>
-    <!-- </div> -->
-    <!--  -->
+   
         <div id="searchresult"></div>
 
 
@@ -126,6 +147,7 @@
             results.map((result) => {
                 const image = document.createElement("img");
                 image.src = result.urls.small;
+                image.className="images"
                 const imagelink = document.createElement("a");
                 imagelink.href=result.links.html
                 imagelink.target = "_blank";
