@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         h1 {
-            color: darkslateblue;
+            color:purple;
             text-align: center;
             margin-top: 80px;
             font-size: 50px;
@@ -16,11 +15,14 @@
 
         .bar {
             padding: 15px;
+            /* margin-left: 600px; */
             background-color: whitesmoke;
             color: black;
             border-radius: 15px;
             font-size: 20px;
+            /* padding-left: 20px; */
             padding-right: 50px;
+
         }
 
         button {
@@ -41,26 +43,52 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 50px;
+
         }
+
+
+
 
         .images {
             width: 100%;
             height: 260px;
             transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
             border-radius: 25px;
-            cursor: pointer;
+            opacity: 1.5;
+
         }
 
         .images:hover {
-            transform: translateY(-10px) translateX(10px) scale(1.2);
+            transform: translateY(-10px);
+            transform: translateX(10px);
             box-shadow: 10px 10px 10px rgba(83, 69, 69, 0.489);
             border-radius: 15%;
+            transform: scale(1.2, 1.2);
+
         }
 
+        .images:hover {
+            filter: brightness(1);
         
+        }
+
+        /* .images:not(:hover) {
+            opacity: 0.5;
+          
+        } 
+    
+        .images:default{
+            opacity: lessthan 1;
+        } */
+
+
+
+
+
+
         #showmorebtn {
-            color: blue;
-            background-color: cornflowerblue;
+            color:wheat;
+            background-color:chocolate;
             border: 0;
             outline: 0;
             padding: 10px 20px;
@@ -72,10 +100,16 @@
 
         body {
             background-attachment: fixed;
-            background-color: aquamarine;
+            background-color:rgba(0, 0, 255, 0.434);
+            background-image: url("images/flower.jpeg");
+        
+            background-size: cover;
+        }
+        .hide-background {
+            background-image: none !important;
         }
 
-        /* Media queries */
+        /* meadia queries */
         .bar {
             width: 200px;
         }
@@ -99,37 +133,28 @@
 
 <body>
     <h1>Image Search App</h1>
-
+    
     <form id="searchform">
-        <input type="text" class="bar" placeholder="Search anything here....." id="searchbox">
-        <button>Search</button>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators" id="carousel-indicators"></ol>
-            <div class="carousel-inner" id="carousel-inner"></div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-        
+
+        <!-- <input class="bar" type="text" id="searchbox" placeholder="search anything here...."> -->
+        <!-- <input type="text" class="bar" placeholder="Search anything here....." id="searchbox">
+        <button>Search</button> -->
+        <!-- <button type="button">Search</button> -->
+<!-- 
         <div id="searchresult"></div>
 
-        <button id="showmorebtn">Show More</button>
+
+        <button id="showmorebtn">showmore</button>
     </form>
-
-
     <script>
         const accesskey = "krT57pdCdUVsHG33AHYxMGIl_k2F5N21Ww24QHcXA38";
         const searchform = document.getElementById("searchform");
         const searchbox = document.getElementById("searchbox");
         const searchresult = document.getElementById("searchresult");
         const showmorebtn = document.getElementById("showmorebtn");
-        let page = 1;
 
+        let page = 1;
+        let keyword = ""
         async function searchimages() {
             const keyword = searchbox.value;
             const url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accesskey}&per_page=09`;
@@ -142,40 +167,40 @@
             }
 
             const results = data.results;
-            results.forEach((result, index) => {
+            results.map((result) => {
                 const image = document.createElement("img");
                 image.src = result.urls.small;
-                image.className = "images";
-                image.setAttribute('data-index', index); // Adding data-index attribute to identify the image
+                image.className = "images"
                 const imagelink = document.createElement("a");
-                imagelink.href = result.links.html;
+                imagelink.href = result.links.html
                 imagelink.target = "_blank";
                 imagelink.appendChild(image);
                 searchresult.appendChild(imagelink);
             });
 
-            showmorebtn.style.display = "block";
+            showmorebtn.style.display = "block"
+
+            document.body.classList.add('hide-background');
         }
+
+        
+
 
         searchform.addEventListener("submit", (e) => {
             e.preventDefault();
             page = 1;
             searchimages();
+            
         });
 
         showmorebtn.addEventListener("click", () => {
-            page++;
-            searchimages();
-        });
+            page++
 
-        
+            searchimages()
+        })
 
-        // Add event listeners to handle image hover effect
-        document.querySelectorAll('.images').forEach(item => {
-            item.addEventListener('mouseenter', handleImageHover);
-            item.addEventListener('mouseleave', handleImageHover);
-        });
     </script>
 </body>
 
-</html>
+</html>  -->
+
